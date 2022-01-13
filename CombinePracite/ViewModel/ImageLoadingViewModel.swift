@@ -16,11 +16,25 @@ class ImageLoadingViewModel: ObservableObject {
     
     var cancellables = Set<AnyCancellable>()
     
-    let urlString: String
+    let manager = PhotoModelCacheManager.instance
     
-    init(url: String) {
+    let urlString: String
+    let imageKey: String
+    
+    init(url: String, key: String) {
         urlString = url
-        downloadImage()
+        imageKey = key
+        getImage()
+    }
+    // getting image from cache, if its not there then download
+    func getImage() {
+        if let savedImage = manager.get(key: imageKey) {
+            image = savedImage
+            print("Getting from cache")
+        } else {
+            downloadImage()
+            print("Downloading...")
+        }
     }
     
     func downloadImage() {
@@ -36,7 +50,10 @@ class ImageLoadingViewModel: ObservableObject {
             .sink { [weak self] _ in
                 self?.isLoading = false
             } receiveValue: { [weak self] returnedImage in
-                self?.image = returnedImage
+                guard let self = self,
+                      let image = returnedImage else { return }
+                self.image = image
+                self.manager.add(key: self.imageKey, value: image)
             }
             .store(in: &cancellables)
     }

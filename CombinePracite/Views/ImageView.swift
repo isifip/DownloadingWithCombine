@@ -11,8 +11,8 @@ struct ImageView: View {
     
     @StateObject var loader: ImageLoadingViewModel
     
-    init(url: String) {
-        _loader = StateObject(wrappedValue: ImageLoadingViewModel(url: url))
+    init(url: String, key: String) {
+        _loader = StateObject(wrappedValue: ImageLoadingViewModel(url: url, key: key))
     }
     
     var body: some View {
@@ -28,7 +28,7 @@ struct ImageView: View {
 
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {
-        ImageView(url: "https://via.placeholder.com/600/92c952")
+        ImageView(url: "https://via.placeholder.com/600/92c952", key: "1")
             .frame(width: 70, height: 70)
             .previewLayout(.sizeThatFits)
     }

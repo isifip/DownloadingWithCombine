@@ -13,7 +13,7 @@ struct ImageRow: View {
     
     var body: some View {
         HStack {
-            ImageView(url: model.url)
+            ImageView(url: model.url, key: "\(model.id)")
                 .frame(width: 50, height: 50)
             VStack(alignment:.leading) {
                 Text(model.title)
