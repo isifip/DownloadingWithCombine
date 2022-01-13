@@ -15,9 +15,10 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(viewModel.dataArray) { model in
-                    Text(model.title)
+                   ImageRow(model: model)
                 }
             }
+            .listStyle(.grouped)
             .navigationTitle("Downloading")
         }
     }
