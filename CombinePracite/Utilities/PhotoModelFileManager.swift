@@ -2,7 +2,7 @@
 //  PhotoModelFileManager.swift
 //  CombinePracite
 //
-//  Created by Irakli Sokhaneishvili on 13.01.22.
+//  Created by Irakli Sokhaneishvili on 14.01.22.
 //
 
 
