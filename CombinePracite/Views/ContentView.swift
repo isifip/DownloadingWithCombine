@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject var viewModel = DownloadImagesViewModel()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            List {
+                ForEach(viewModel.dataArray) { model in
+                    Text(model.title)
+                }
+            }
+            .navigationTitle("Downloading")
+        }
     }
 }
 
